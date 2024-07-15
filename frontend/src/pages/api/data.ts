@@ -1,13 +1,24 @@
-import axios from "axios";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 
+console.log('SPRING_BOOT_API_URL:', process.env.SPRING_BOOT_API_URL);
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    // TODO: Adjust with the Endpoints later on
-    // PLACEHOLDER
-    try {
-        const response = await axios.get('FLASK_API_URL/data');
-        res.status(200).json(response.data);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data'})
+  try {
+    const apiUrl = process.env.SPRING_BOOT_API_URL;
+    if (!apiUrl) {
+      throw new Error('SPRING_BOOT_API_URL is not defined');
     }
+
+    console.log('Fetching from Spring Boot API:', apiUrl);
+    const response = await fetch(`${apiUrl}/`); // or the specific endpoint you're targeting
+
+    if (!response.ok) {
+      throw new Error(`Spring Boot API responded with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('Error in API route:', error);
+    res.status(500).json({ error: 'Failed to fetch data from Spring Boot API' });
+  }
 }

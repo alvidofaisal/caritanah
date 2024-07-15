@@ -25,19 +25,31 @@ const perks = [
 ];
 
 export default function Home() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+        console.log("Fetching data from /api/data");
         const response = await fetch('/api/data');
+        console.log("Response status:", response.status);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const result = await response.json();
+        console.log("Received data:", result);
         setData(result);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError('Failed to fetch data. Please try again later.');
+      } finally {
+        setLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -46,7 +58,7 @@ export default function Home() {
       <MaxWidthWrapper>
         <div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Your marketplace for high-quality <span className="text-green-600">land assets</span>.
+            Pusat jual-beli lahan <span className="text-green-600">#1</span> di Indonesia.
           </h1>
           <p className="mt-6 text-lg max-w-prose text-muted-foreground">Ayo bangun kembali. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
@@ -56,9 +68,11 @@ export default function Home() {
         </div>
 
         {/* TODO: List Products */}
+        {loading && <p>Loading...</p>}
+        {error && <p className='text-red-500'>{error}</p>}
         {data && (
           <div>
-            <h2>Data from Flask API:</h2>
+            <h2>Data from Spring Boot API:</h2>
             <pre>{JSON.stringify(data, null, 2)}</pre>
           </div>
         )}

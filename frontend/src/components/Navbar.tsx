@@ -29,6 +29,14 @@ const Navbar = () => {
                 <div className="hidden lg:flex lg:flex-1 lg: items-center lg:justify-end lg:space-x-6">
                   {user ? null : (
                     <Link
+                      href="/pasang-iklan"
+                      className={buttonVariants()}
+                    >
+                      Pasang Iklan
+                    </Link>
+                  )}
+                  {user ? null : (
+                    <Link
                       href="/sign-in"
                       className={buttonVariants({ variant: "ghost" })}
                     >
