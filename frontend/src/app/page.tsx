@@ -5,6 +5,27 @@ import MaxWidthWrapper from "../components/MaxWidthWrapper";
 import { Button, buttonVariants } from "../components/ui/button";
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
 import Link from "next/link";
+import { Search } from "lucide-react";
+import { Input } from '../components/ui/input';
+
+const LargeSearchBar = ({ maxWidth = "max-w-xl", placeholder = "Search locations" }) => {
+  return (
+    <div className={`w-full ${maxWidth} mx-auto mt-8`}>
+      <div className="relative">
+        <Input 
+          type="text" 
+          placeholder={placeholder} 
+          className="w-full py-6 pl-6 pr-16 text-xl rounded-full shadow-lg focus:ring-2 focus:ring-green-500"
+        />
+        <Button 
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-green-600 hover:bg-green-700 rounded-full p-3"
+        >
+          <Search className="h-7 w-7 text-white" />
+        </Button>
+      </div>
+    </div>
+  );
+};
 
 const perks = [
   {
@@ -60,11 +81,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Pusat jual-beli lahan <span className="text-green-600">#1</span> di Indonesia.
           </h1>
-          <p className="mt-6 text-lg max-w-prose text-muted-foreground">Ayo bangun kembali. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div className="flex flex-col sm:flex-row gap-4 mt-6">
-            <Link href="/products" className={buttonVariants()}>Browse Empty Lands Around You</Link>
-            <Button variant="ghost">Our quality promise &rarr;</Button>
-          </div>
+          <LargeSearchBar maxWidth="max-w-2xl" placeholder="Cari lokasi lahan..." />
         </div>
 
         {/* TODO: List Products */}
