@@ -2,22 +2,18 @@ package id.co.caritanah.marketplace.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class HomeController {
 
     @GetMapping("/")
-    public String home() {
-        return "Welcome to Caritanah Marketplace!";
+    public Map<String, String> home() {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Welcome to Caritanah Marketplace!");
+        return response;
     }
 
-    @GetMapping("/about")
-    public String about() {
-        return "Caritanah Marketplace is a platform for buying and selling local products.";
-    }
-
-    @GetMapping("/contact")
-    public String contact() {
-        return "Contact us at: support@caritanah.co.id";
-    }
+    // ... other methods ...
 }
