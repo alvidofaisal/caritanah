@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
-import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
+
+// Custom X (formerly Twitter) icon component
+const XLogo = ({ size = 24, className = "" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" className={className}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
 
 const Footer = () => {
   return (
@@ -85,7 +92,7 @@ const Footer = () => {
                 <Instagram size={24} />
               </Link>
               <Link href="#" className="hover:text-green-600">
-                <Twitter size={24} />
+                <XLogo size={24} />
               </Link>
               <Link href="#" className="hover:text-green-600">
                 <Linkedin size={24} />
@@ -96,14 +103,8 @@ const Footer = () => {
 
         {/* Bottom links */}
         <div className="border-t pt-8 flex flex-wrap justify-between items-center">
-          <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+          <p>&copy; 2024 Developed by RAFP. All rights reserved.</p>
           <div className="space-x-4">
-            <Link href="#" className="hover:underline">
-              Don't sell my info
-            </Link>
-            <Link href="#" className="hover:underline">
-              Fair housing
-            </Link>
             <Link href="#" className="hover:underline">
               New listings
             </Link>
