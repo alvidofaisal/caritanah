@@ -1,10 +1,15 @@
+"use client"
+
+import { useState } from "react";
 import Link from "next/link";
 import { Icons } from "./Icons";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
+import { SignupModal } from "../pages/auth/SignupModal";
 
 const Navbar = () => {
   const user = null;
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
   return (
     <div className="bg-white sticky z-50 top-0 inset-x-0 h-16">
@@ -46,12 +51,12 @@ const Navbar = () => {
                   {user ? (
                     <p></p>
                   ) : (
-                    <Link
-                      href="/sign-up"
+                    <button
+                      onClick={() => setIsSignupModalOpen(true)}
                       className={buttonVariants({ variant: "ghost" })}
                     >
                       Create Account
-                    </Link>
+                    </button>
                   )}
 
                   {user ? (
@@ -73,6 +78,11 @@ const Navbar = () => {
             </div>
           </div>
       </header>
+
+      <SignupModal
+        isOpen={isSignupModalOpen} 
+        onClose={() => setIsSignupModalOpen(false)}
+      />
     </div>
   );
 };

@@ -106,7 +106,7 @@ export default function Home() {
       <MaxWidthWrapper>
         <div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Pusat jual-beli lahan #1 di
+            Pusat jual-beli lahan <span className="text-yellow-300 font-extrabold">#1</span> di
             Indonesia
           </h1>
           <LargeSearchBar
@@ -129,46 +129,35 @@ export default function Home() {
       {/* Carousel section */}
       <section className="border-t border-gray-200 bg-gray-50 mt-20">
         <div className="py-20">
-          <h2 className="text-2xl font-bold text-center mb-8">Jenis Lahan</h2>
           <Carousel className="w-full max-w-7xl mx-auto">
-            <CarouselContent className="-ml-2 md:-ml-4">
+            <CarouselContent className="-ml-4">
               {landTypes.map((type, index) => (
-                <CarouselItem
-                  key={index}
-                  className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
-                >
-                  <Link
-                    href={`/category/${type.slug}`}
-                    className="block aspect-square max-w-[200px] mx-auto"
-                  >
-                    <div className="p-2 border rounded-lg hover:shadow-md transition-shadow duration-200 h-full flex flex-col justify-between">
+                <CarouselItem key={index} className="pl-4 sm:basis-1/2 lg:basis-1/3">
+                  <Link href={`/category/${type.slug}`} className="block aspect-square max-w-[350px] mx-auto">
+                    <div className="p-6 border rounded-xl hover:shadow-lg transition-shadow duration-200 h-full flex flex-col justify-between bg-white">
                       <div className="flex flex-col items-center">
-                        <div className="w-full h-24 relative mb-2">
-                          <Image
-                            src={type.imagePath}
+                        <div className="w-full h-48 relative mb-4">
+                          <Image 
+                            src={type.imagePath} 
                             alt={type.name}
                             layout="fill"
                             objectFit="cover"
                             className="rounded-lg"
                           />
                         </div>
-                        <h3 className="text-sm font-medium text-gray-900 mb-1 text-center">
-                          {type.name}
-                        </h3>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-3 text-center">{type.name}</h3>
                       </div>
-                      <p className="text-xs text-muted-foreground text-center line-clamp-2">
-                        {type.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground text-center">{type.description}</p>
                     </div>
                   </Link>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="bg-green-600 hover:bg-green-700 text-white" />
+            <CarouselNext className="bg-green-600 hover:bg-green-700 text-white" />
           </Carousel>
         </div>
-      </section>
+      </section>     
       <Footer />
     </div>
   );
