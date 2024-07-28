@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Icons } from "./Icons";
@@ -88,10 +88,13 @@ const Navbar = () => {
       </header>
       
       {isSignupModalOpen && (
-        <SignupModal
-          isOpen={isSignupModalOpen} 
-          onClose={() => setIsSignupModalOpen(false)}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SignupModal
+            isOpen={isSignupModalOpen} 
+            onClose={() => setIsSignupModalOpen(false)}
+          />
+        </Suspense>
+
       )}
     </div>
   );
