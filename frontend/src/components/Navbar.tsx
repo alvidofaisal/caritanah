@@ -1,11 +1,19 @@
-"use client"
+"use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Icons } from "./Icons";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
-import { SignupModal } from "../pages/auth/SignupModal";
+
+const SignupModal = dynamic(
+  async () => {
+    const module = await import("../pages/auth/SignupModal");
+    return module.SignupModal;
+  }, 
+  { ssr: false }
+);
 
 const Navbar = () => {
   const user = null;
@@ -78,11 +86,13 @@ const Navbar = () => {
             </div>
           </div>
       </header>
-
-      <SignupModal
-        isOpen={isSignupModalOpen} 
-        onClose={() => setIsSignupModalOpen(false)}
-      />
+      
+      {isSignupModalOpen && (
+        <SignupModal
+          isOpen={isSignupModalOpen} 
+          onClose={() => setIsSignupModalOpen(false)}
+        />
+      )}
     </div>
   );
 };

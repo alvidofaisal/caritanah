@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "../lib/utils";
 import Navbar from "../components/Navbar";
 import { SessionProvider } from "next-auth/react";
+import { ClientProvider } from "../components/ClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,12 +24,7 @@ export default function RootLayout({
         className={cn("relative h-full font-sans antialiased", 
         inter.className
         )}>
-        <SessionProvider> 
-          <main className="relative flex flex-col min-h-screen">
-            <Navbar />
-            <div className="flex-grow flex-1">{children}</div>
-          </main>
-        </SessionProvider>  
+          <ClientProvider>{children}</ClientProvider>
       </body>
     </html>
   );
