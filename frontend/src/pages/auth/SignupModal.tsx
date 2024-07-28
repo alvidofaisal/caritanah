@@ -76,6 +76,9 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
     }
   };
 
+  const handleGoogleSignup = () => {
+    // Implement 
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
