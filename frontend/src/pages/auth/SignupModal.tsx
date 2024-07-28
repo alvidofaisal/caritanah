@@ -8,6 +8,8 @@ import {
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
+import { signIn } from "next-auth/react"
+import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
 interface SignupModalProps {
   isOpen: boolean;
@@ -77,9 +79,13 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   };
 
   const handleGoogleSignup = () => {
-    // Implement 
-  }
+    signIn('google', { callbackUrl: '/', prompt: 'select_account'});
+  };
 
+  const handleFacebookSignup = () => {
+    signIn('facebook', { callbackUrl: '/', prompt: 'select_account'});
+  };
+  
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
@@ -126,6 +132,35 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Signing up..." : "Sign Up"}
           </Button>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGoogleSignup}
+              className="w-full"
+            >
+              <FaGoogle className="mr-2" />
+              Google
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleFacebookSignup}
+              className="w-full"
+            >
+              <FaFacebook className="mr-2" />
+              Facebook
+            </Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>
